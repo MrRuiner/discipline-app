@@ -1,0 +1,30 @@
+{
+  "name": "discipline-app",
+  "version": "1.0.0",
+  "description": "This applicstion will help you to be disciplined.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "serve": "nodemon src/index.js",
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrRuiner/discipline-app.git"
+  },
+  "author": "Aliakbar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MrRuiner/discipline-app/issues"
+  },
+  "homepage": "https://github.com/MrRuiner/discipline-app#readme",
+  "dependencies": {
+    "express": "^4.19.2",
+    "express-handlebars": "^7.1.3",
+    "nodemon": "^3.1.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
