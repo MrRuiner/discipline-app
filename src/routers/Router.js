@@ -1,8 +1,9 @@
 import { Router } from "express";
-import { getMainPage } from "../controllers/pages.controller.js";
+import { getRoutine, addRoutine } from "../controllers/addRoutine.controller.js";
 
-const router = Router()
+export const router = Router();
 
-router.get("/", getMainPage)
+router.get("/", getRoutine); 
+router.post('/add', addRoutine)
 
-export default router
+export default router;

@@ -1,1 +1,88 @@
-<h1> Testing </h1>
+<nav class="nav">
+    <div class="container-fluid d-flex justify-content-center">
+        <a href="/" class="navbar-brand fs-1"> Расписание </a>
+    </div>
+</nav>
+
+<div class="wrapper d-flex justify-content-center">
+    <ul class="list-group  mt-4 w-75">
+        {{#each routines}}
+        <li class="list-group-item d-flex justify-content-center fs-5 w-100 list-group-item-light mt-2">
+            <span class="w-100"> {{this.deal}} </span>
+            <span class="timer ms-2" data-time="{{this.time}}"> {{this.time}} </span>
+        </li>
+        {{/each}}
+    </ul>
+</div>
+
+<div class="btn-wrapper d-flex justify-content-center mt-5">
+    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Добавить расписание
+    </button>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel"> Добавить расписание </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" class="form" action="/add">
+                    <div class="inputs-wrapper">
+                        <label for="deal-input" class="form-label"> Задача: </label>
+                        <input type="text" class="form-control" id="deal-input" name="deal">
+
+                        <hr>
+
+                        <label for="time-input" class="form-label"> Время в котором начинается ваша задача: </label>
+                        <input type="time" class="form-control" id="time-input" name="time">
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light form-control" data-bs-dismiss="modal"> Закрыть </button>
+                <input type="submit" class="btn btn-secondary form-control" value="Добавить">
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        function updateTasks() {
+            const now = new Date();
+            const currentTime = now.getTime();
+
+            const tasks = document.getElementsByClassName('list-group-item');
+            const taskTimes = document.getElementsByClassName('timer');
+
+            for (let i = 0; i < taskTimes.length; i++) {
+                const taskTime = taskTimes[i].getAttribute('data-time');
+                const [taskHours, taskMinutes] = taskTime.split(':').map(Number);
+
+                const taskDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), taskHours, taskMinutes);
+                const taskStartTime = taskDate.getTime();
+
+                const taskEndDate = new Date(taskDate);
+                taskEndDate.setHours(taskEndDate.getHours() + 2);
+                const taskEndTime = taskEndDate.getTime();
+
+                if (currentTime >= taskStartTime && currentTime <= taskEndTime) {
+                    tasks[i].classList.add('active');
+                } else {
+                    tasks[i].classList.remove('active');
+                }
+            }
+        }
+
+        updateTasks();
+        setInterval(updateTasks, 60000);
+    });
+</script>

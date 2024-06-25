@@ -4,8 +4,9 @@ import path from "path";
 import router from "./routers/Router.js";
 
 const app = express();
-const __dirname = path.resolve();
 const port = process.env.PORT || 3000;
+
+export const __dirname = path.resolve();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, "static")));
